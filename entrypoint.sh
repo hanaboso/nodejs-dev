@@ -15,9 +15,14 @@ sudo chown dev:dev /srv/.npm
 ln -s /srv/.npm /home/dev/.npm
 
 # Add host key(s) to known_hosts (convinient when using private git repos)
-if [ -n "KNOWN_HOSTS" ]; then
+if [ -n "$KNOWN_HOSTS" ]; then
     mkdir -p $HOME/.ssh
     echo "$KNOWN_HOSTS" >> $HOME/.ssh/known_hosts
-fi    
+fi
+
+# Add registy auth, etc. to ~/.npmrc
+if [ -n "$NPMRC" ]; then
+    echo "$NPMRC" > $HOME/.npmrc
+fi
 
 exec "$@"
