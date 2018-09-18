@@ -25,4 +25,9 @@ if [ -n "$NPMRC" ]; then
     echo "$NPMRC" > $HOME/.npmrc
 fi
 
+# Add registy auth, etc. to ~/.npmrc (from base64)
+if [ -n "$NPMRC_BASE64" ]; then
+    echo "$NPMRC_BASE64" | base64 -d > $HOME/.npmrc
+fi
+
 exec "$@"
